@@ -191,8 +191,8 @@ image::/img/guide/collection-nodejs-project-layout.png[link="/img/guide/collecti
 This project contains the following artifacts:
 
 * `app.js`, a sample javascript app
-* `package-lock.json`, a project build file
-* `package.json`, a project build file
+* `package-lock.json`, the application's npm dependency tree
+* `package.json`, the application's package manifest
 
 // =================================================================================================
 // Running the Appsody development environment
@@ -226,40 +226,34 @@ You are now ready to begin developing your application.
 
 == Creating and updating the application
 
-You are now going to create a new route that listens on `http://localhost:3000/example`.
+You are now going to create a new simple web server that listens on `http://localhost:3000/`.
 
-Create a new file called `example.js` in your project folder and populate it with the following code:
-
-[source]
-----
-var express = require('express');
-var router = express.Router();
-/* GET users listing. */
-router.get('/', function(req, res, next) {
- res.send('NEW ROUTE LISTENING');
-});
-module.exports = router;
-----
-
-Save the changes.
-
-Edit the `app.js` file and update the contents to match the following code:
+Edit the `app.js` file in your project folder and update the contents to match the following code:
 
 [source]
 ----
-const app = require('express')()
-var exampleRouter = require("./example")
-app.get('/', (req, res) => {
- res.send("Hello from Appsody!");
+const http = require('http');
+
+const hostname = '0.0.0.0';
+const port = 3000;
+
+const hander = (req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World.\n');
+}
+
+const server = http.createServer((handler) 
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
-app.use("/example", exampleRouter);
-module.exports.app = app;
 ----
 
 Save the changes.
 
 Appsody watches for file changes and automatically updates your application. Point your browser to
-`http://localhost:3000/example` to see your new route, which displays **NEW ROUTE LISTENING**.
+`http://localhost:3000/` to see your new server, which displays **Hello World.**.
 
 // =================================================================================================
 // Testing the application
@@ -267,7 +261,8 @@ Appsody watches for file changes and automatically updates your application. Poi
 
 == Testing the application
 
-If you are building an application that is composed of microservices, you need to test within the context of the overall system. First, test your application and perform unit testing in isolation. To test the application as part of the system, deploy the system and then the new application.
+If you are building an application that is composed of microservices, you need to test within the context of the overall system. First, test your application and perform unit testing in isolation. 
+To test the application as part of the system, deploy the system and then the new application.
 
 You can choose how you want to deploy the system and application. If you have adequate CPU and memory to run MiniShift, the application, and the associated services, then you can deploy the application on a local Kubernetes that is running on your computer. Alternatively, you can enable Docker Desktop for Kubernetes, which is described in the Prerequisites section of the guide.
 
@@ -289,7 +284,7 @@ After some time you see a message similar to the following example:
 
 [source, role='no_copy']
 ----
-Deployed project running at http://localhost:30262
+Deployed project running at http://localhost:32569
 ----
 
 Run the following command to check the status of the application pods:
@@ -309,7 +304,7 @@ simple-nodejs-775b655768-lqn6q           1/1     Running   0          3m10s
 After the `simple-nodejs` pod starts, go to the URL that was returned when you ran the `appsody deploy` command,
 and you see the Appsody microservice splash screen. To see the response from your application, point your browser to
 the `<URL_STRING>/example` URL, where `<URL_STRING>` is the URL that was returned. For example, http://localhost:30262
-was returned in the previous example. Go to the http://localhost:30262/example URL to see the deployed application response.
+was returned in the previous example. Go to the http://localhost:30262/ URL to see the deployed application response.
 
 Use the following command to stop the deployed application:
 [role="command"]
