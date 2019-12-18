@@ -240,7 +240,7 @@ const port = 3000;
 const hander = (req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World.\n');
+  res.end('New web server available!\n');
 }
 
 const server = http.createServer((handler) 
@@ -253,7 +253,7 @@ server.listen(port, hostname, () => {
 Save the changes.
 
 Appsody watches for file changes and automatically updates your application. Point your browser to
-`http://localhost:3000/` to see your new server, which displays **Hello World.**.
+`http://localhost:3000/` to see your new server, which displays **New web server available!**.
 
 // =================================================================================================
 // Testing the application
@@ -303,8 +303,8 @@ simple-nodejs-775b655768-lqn6q           1/1     Running   0          3m10s
 
 After the `simple-nodejs` pod starts, go to the URL that was returned when you ran the `appsody deploy` command,
 and you see the Appsody microservice splash screen. To see the response from your application, point your browser to
-the `<URL_STRING>/example` URL, where `<URL_STRING>` is the URL that was returned. For example, http://localhost:30262
-was returned in the previous example. Go to the http://localhost:30262/ URL to see the deployed application response.
+the `<URL_STRING>/example` URL, where `<URL_STRING>` is the URL that was returned. For example, http://localhost:32569
+was returned in the previous example. Go to the http://localhost:32569/ URL to see the deployed application response.
 
 Use the following command to stop the deployed application:
 [role="command"]
