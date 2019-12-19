@@ -161,7 +161,7 @@ Running command: docker run --rm --entrypoint /bin/bash kabanero/nodejs:0.2 -c f
 Successfully initialized Appsody project
 ----
 
-Your new project is created, built, and running inside a container.
+Your new project is created, built, and started inside a container.
 
 == Understanding the project layout
 
