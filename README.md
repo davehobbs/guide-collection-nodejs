@@ -6,7 +6,7 @@ duration: 40 minutes
 releasedate: 2020-01-27
 description: Learn how to create, run, update, deploy, and deliver a simple cloud native application using the Node.js application stack.
 tags: ['stack', 'Node.js']
-guide-category: collections
+guide-category: stacks
 ---
 
 <!-- Note:
